@@ -6,23 +6,13 @@
 /*   By: gargrigo <gargrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 16:31:27 by gargrigo          #+#    #+#             */
-/*   Updated: 2026/02/24 15:05:34 by gargrigo         ###   ########.fr       */
+/*   Updated: 2026/02/24 16:16:36 by gargrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include "ft_printf.h"
-
-int	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
 
 int	ft_isvalid(const char *base)
 {
@@ -50,31 +40,29 @@ int	ft_isvalid(const char *base)
 	return (1);
 }
 
-int ft_length(long long n, const char *base)
+int	ft_length(long long n, const char *base)
 {
-    int length;
-    int count;
-    long long num;
+	int			length;
+	int			count;
+	long long	num;
 
-    length = ft_strlen(base);
-    count = 0;
-    if (n < 0)
-    {
-        count++;
-        num = -n;
-    }
-    else
-        num = n;
-
-    if (num == 0)
-        return (1);
-
-    while (num)
-    {
-        num /= length;
-        count++;
-    }
-    return (count);
+	length = ft_strlen(base);
+	count = 0;
+	if (n < 0)
+	{
+		count++;
+		num = -n;
+	}
+	else
+		num = n;
+	if (num == 0)
+		return (1);
+	while (num)
+	{
+		num /= length;
+		count++;
+	}
+	return (count);
 }
 
 int	ft_putnbr_base(long long n, char *base)
@@ -101,8 +89,8 @@ int	ft_putnbr_base(long long n, char *base)
 	return (0);
 }
 
-int main()
-{
-	ft_putnbr_base(8, "01");
-	return 0;
-}
+// int main()
+// {
+// 	ft_putnbr_base(15, "0123456789abcdef");
+// 	return 0;
+// }

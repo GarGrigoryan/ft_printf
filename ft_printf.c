@@ -6,35 +6,71 @@
 /*   By: gargrigo <gargrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 15:35:42 by gargrigo          #+#    #+#             */
-/*   Updated: 2026/02/20 16:24:52 by gargrigo         ###   ########.fr       */
+/*   Updated: 2026/02/24 16:15:44 by gargrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <stdio.h>
+#include "ft_printf.h"
+
 int	ft_printf(const char *str, ...)
 {
-	int	i;
+	va_list	list;
+	int		i;
+	int		count;
 
+	va_start(list, str);
 	i = 0;
+	count = 0;
 	while (str[i])
 	{
 		if (str[i] == '%')
-			ft_validate(str, &i);
+		{
+			count += ft_validate(str, list, i);
+			i += 2;
+		}
 		else
-			ft_putchar(str[i]);
-		i++;
+		{
+			ft_putchar(str[i++]);
+			count++;
+		}
 	}
+	va_end(list);
+	return (count);
 }
 
-void	ft_validate(const char *str, int *i)
+int	ft_validate(const char *str, va_list list, int i)
 {
-	if (str[*i + 1] == 'c')
-		return ;
+	int	count;
+
+	count = 0;
+	if (str[i + 1] == 'd' || str[i + 1] == 'i')
+		count += ft_putnbr_base(va_arg(list, int), "0123456789");
+	if (str[i + 1] == 'u')
+		count += ft_putnbr_base(va_arg(list, unsigned int), "0123456789");
+	if (str[i + 1] == 'x')
+		count += ft_putnbr_base(va_arg(list, unsigned int), "0123456789abcdef");
+	if (str[i + 1] == 'X')
+		count += ft_putnbr_base(va_arg(list, unsigned int), "0123456789ABCDEF");
+	if (str[i + 1] == 'c')
+		count += ft_putchar(va_arg(list, int));
+	if (str[i + 1] == 's')
+		count += ft_putstr(va_arg(list, char *));
+	else if (str[i + 1] == 'p')
+	{
+		count += write(1, "0x", 2);
+		count += ft_putptr(va_arg(list, unsigned long), "0123456789abcdef");
+	}
+	return (count);
 }
 
-// "" 2 case
-// 1) % ka
-//		pti stugenq ira hajord chary kara ylni cspdiuxX% srancic kamayakan meky yete che return -1 u error
-// 2) % chka
-//		tupy tpum enq
+// int	main()
+// {
+// 	int a = 5;
+// 	int *b = &a;
+// 	ft_printf("%p", b);
+// 	printf("%p", b);
 
-
+// 	return 0;
+// }
