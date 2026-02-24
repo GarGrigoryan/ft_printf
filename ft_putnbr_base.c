@@ -6,7 +6,7 @@
 /*   By: gargrigo <gargrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 16:31:27 by gargrigo          #+#    #+#             */
-/*   Updated: 2026/02/20 17:06:47 by gargrigo         ###   ########.fr       */
+/*   Updated: 2026/02/24 15:05:34 by gargrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,24 @@
 #include <unistd.h>
 #include "ft_printf.h"
 
-int	ft_isvalid(const char *base, int length)
+int	ft_strlen(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+int	ft_isvalid(const char *base)
 {
 	int	i;
 	int	j;
+	int	length;
 
 	i = 0;
+	length = ft_strlen(base);
 	if (length < 2)
 		return (0);
 	while (base[i])
@@ -38,36 +50,31 @@ int	ft_isvalid(const char *base, int length)
 	return (1);
 }
 
-int	ft_strlen(const char *str)
+int ft_length(long long n, const char *base)
 {
-	int	i;
+    int length;
+    int count;
+    long long num;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
+    length = ft_strlen(base);
+    count = 0;
+    if (n < 0)
+    {
+        count++;
+        num = -n;
+    }
+    else
+        num = n;
 
-int	ft_length(long long n, const char *base)
-{
-	int	i;
-	int	length;
+    if (num == 0)
+        return (1);
 
-	i = 0;
-	length = ft_strlen(base);
-	if (n <= 9 && n >= 0)
-		return (1);
-	if (n < 0)
-	{
-		n = -n;
-		i++;
-	}
-	while (n)
-	{
-		n /= length;
-		i++;
-	}
-	return (i);
+    while (num)
+    {
+        num /= length;
+        count++;
+    }
+    return (count);
 }
 
 int	ft_putnbr_base(long long n, char *base)
@@ -77,7 +84,7 @@ int	ft_putnbr_base(long long n, char *base)
 
 	i = 0;
 	res = ft_length(n, base);
-	if (ft_isvalid(base, res))
+	if (ft_isvalid(base))
 	{
 		while (base[i])
 			i++;
@@ -96,6 +103,6 @@ int	ft_putnbr_base(long long n, char *base)
 
 int main()
 {
-	printf("%d", ft_putnbr_base(8, "01"));
+	ft_putnbr_base(8, "01");
 	return 0;
 }
