@@ -6,7 +6,7 @@
 /*   By: gargrigo <gargrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 16:55:01 by gargrigo          #+#    #+#             */
-/*   Updated: 2026/02/24 16:12:16 by gargrigo         ###   ########.fr       */
+/*   Updated: 2026/02/24 16:38:52 by gargrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ int	ft_putstr(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
 	while (str[i])
 		write(1, &str[i++], 1);
 	return (i);

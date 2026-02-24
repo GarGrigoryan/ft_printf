@@ -6,7 +6,7 @@
 /*   By: gargrigo <gargrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 16:56:17 by gargrigo          #+#    #+#             */
-/*   Updated: 2026/02/24 16:16:45 by gargrigo         ###   ########.fr       */
+/*   Updated: 2026/02/24 16:30:42 by gargrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ int	ft_strlen(const char *str);
 int	ft_putnbr_base(long long n, char *base);
 int	ft_validate(const char *str, va_list list, int i);
 int	ft_isvalid(const char *base);
+int	ft_printf(const char *str, ...);
 
 #endif
