@@ -6,7 +6,7 @@
 /*   By: gargrigo <gargrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 15:35:42 by gargrigo          #+#    #+#             */
-/*   Updated: 2026/02/24 16:55:03 by gargrigo         ###   ########.fr       */
+/*   Updated: 2026/02/24 17:12:09 by gargrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,24 @@ int	ft_printf(const char *str, ...)
 	return (count);
 }
 
+int	ptr_case(unsigned long ptr)
+{
+	int	count;
+
+	count = 0;
+	if (ptr == 0)
+	{
+		write(1, "(nil)", 5);
+		count += 5;
+	}
+	else
+	{
+		count += write(1, "0x", 2);
+		count += ft_putptr(ptr, "0123456789abcdef");
+	}
+	return (count);
+}
+
 int	ft_validate(const char *str, va_list list, int i)
 {
 	int				count;
@@ -63,26 +81,7 @@ int	ft_validate(const char *str, va_list list, int i)
 	else if (str[i + 1] == 'p')
 	{
 		ptr = va_arg(list, unsigned long);
-		if (ptr == 0)
-		{
-			write(1, "(nil)", 5);
-			count += 5;
-		}
-		else
-		{
-			count += write(1, "0x", 2);
-			count += ft_putptr(ptr, "0123456789abcdef");
-		}
+		count += ptr_case(ptr);
 	}
 	return (count);
 }
-
-// int	main()
-// {
-// 	// int a = 5;
-// 	// int *b = &a;
-// 	// ft_printf("%p", b);
-// 	int c = printf("%p", 0);
-// 	printf("%d", c);
-// 	return 0;
-// }
