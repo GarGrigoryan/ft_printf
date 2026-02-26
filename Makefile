@@ -10,7 +10,8 @@ CFLAG = -Wall -Werror -Wextra -c
 
 SRC =	ft_printf.c \
 		ft_putnbr_base.c \
-		utils.c
+		utils.c \
+		ft_ptr.c
 
 OBJ = $(SRC:.c=.o)
 

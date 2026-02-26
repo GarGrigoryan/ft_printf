@@ -6,12 +6,10 @@
 /*   By: gargrigo <gargrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 16:31:27 by gargrigo          #+#    #+#             */
-/*   Updated: 2026/02/24 16:16:36 by gargrigo         ###   ########.fr       */
+/*   Updated: 2026/02/26 15:40:09 by gargrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
 #include "ft_printf.h"
 
 int	ft_isvalid(const char *base)
@@ -40,7 +38,7 @@ int	ft_isvalid(const char *base)
 	return (1);
 }
 
-int	ft_length(long long n, const char *base)
+static int	ft_length(long long n, const char *base)
 {
 	int			length;
 	int			count;
@@ -88,9 +86,3 @@ int	ft_putnbr_base(long long n, char *base)
 	}
 	return (0);
 }
-
-// int main()
-// {
-// 	ft_putnbr_base(15, "0123456789abcdef");
-// 	return 0;
-// }
