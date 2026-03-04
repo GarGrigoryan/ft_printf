@@ -2,7 +2,7 @@
 
 # ft_printf
 
-## Description oooo
+## Description
 
 ft_printf is a custom implementation of the standard C printf() function from the C standard library.
 
